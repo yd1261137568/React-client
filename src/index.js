@@ -4,8 +4,10 @@ import ReactDOM from 'react-dom';
 
 import {HashRouter, Switch, Route} from 'react-router-dom'
 import Login from './components/login';
-import Register from './components/register';
+import Register from './containers/register';
 import Main from './components/main';
+
+import './assets/less/index.less'
 ReactDOM.render(
   <HashRouter>
     <Switch>

@@ -1,10 +1,18 @@
 import React, {Component} from 'react';
 import {NavBar, List, InputItem, Button, WingBlank, WhiteSpace, Radio} from 'antd-mobile';
 import Logo from '../logo/logo.jsx';
-import {reqRegister} from '../../api';
+import PropTypes from 'prop-types';
+import {Redirect} from 'react-router-dom';
+
 const Item = List.Item;
 
 class Register extends Component{
+  static propTypes = {
+    user: PropTypes.object.isRequired,
+    register: PropTypes.func.isRequired
+  };
+
+
   state = {
     username:'',
     password:'',
@@ -20,7 +28,8 @@ class Register extends Component{
   register = async () => {
     //获取表单数据
     const {username, rePassword, password, type} = this.state;
-    console.log(username, rePassword, password, type);
+    this.props.register({username,rePassword,password,type})
+   /* console.log(username, rePassword, password, type);
     //判断密码和确认密码是否一致
     if (password === rePassword) {
       //发送ajax请求
@@ -30,23 +39,28 @@ class Register extends Component{
     } else {
       //提示两次密码输入不一致
       alert('两次密码输入不一致');
-    }
+    }*/
 
-  }
+  };
 
   goLogin = () => {
     //跳转到登录路由，编程式导航
     this.props.history.replace('/login');  //替换浏览历史记录
-  }
+  };
 
 
   render(){
       const {type} = this.state;
+      const {meg, redirectTo} = this.props.user;
+      if(redirectTo){
+        return <Redirect to={redirectTo} />
+      }
         return (
           <div>
             <NavBar>硅 谷 直 聘</NavBar>
             <Logo />
             <WingBlank>
+              {meg? <p className="err-meg">{meg}</p> : ''}
               <form>
                 <List>
                   <WhiteSpace />
