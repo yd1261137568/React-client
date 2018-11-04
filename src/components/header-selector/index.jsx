@@ -26,7 +26,7 @@ class HeaderSelector extends Component {
 
     const headerUI = icon ? <div>已选头像<img src={icon}/></div> : '请选择图像';
     const data = Array.from(new Array(20)).map((item, index) => ({
-      icon: require(`./avatars/头像${index + 1}.png`),
+      icon: require(`../../assets/images/头像${index + 1}.png`),
       text: `头像${index + 1}`,
     }));
     return (

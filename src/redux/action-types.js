@@ -5,3 +5,6 @@ export const ERR_MEG = 'ERR_MEG';
 //保存数据
 export const UPDATA_USER = 'UPDATA_USER';
 export const RESET_USER = 'RESET_USER';
+
+export const UPDATA_USER_LIST = 'UPDATA_USER_LIST';
+export const RESET_USER_LIST = 'RESET_USER_LIST';

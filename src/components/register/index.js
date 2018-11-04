@@ -17,7 +17,7 @@ class Register extends Component{
     username:'',
     password:'',
     rePassword:'',
-    type:'boss'
+    type:'laoban'
   };
   handleChange = (name,val) => {
     //更新

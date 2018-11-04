@@ -1,7 +1,7 @@
 
 import React, {Component} from 'react';
 import {NavBar, InputItem, Button, TextareaItem} from 'antd-mobile';
-import HeaderSelector from '../../header-selector';
+import HeaderSelector from '../header-selector';
 import PropTypes from 'prop-types';
 
 class LaobanInfo extends Component {
@@ -29,7 +29,7 @@ class LaobanInfo extends Component {
 
   saveUserInfo = () => {
     this.props.updateUserInfo(this.state);
-  }
+  };
   render() {
     const {meg} = this.props.user;
     return (

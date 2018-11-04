@@ -1,6 +1,6 @@
 
 import {combineReducers} from 'redux';
-import {AUTH_SUCCESS,ERR_MEG,UPDATA_USER,RESET_USER} from './action-types';
+import {AUTH_SUCCESS,ERR_MEG,UPDATA_USER,RESET_USER, UPDATA_USER_LIST, RESET_USER_LIST} from './action-types';
 
 import {getRedirectPath} from '../utils'
 
@@ -24,8 +24,21 @@ function user(preState = initUserState,action) {
       return preState;
   }
 }
+const initUserListState = [];
+function userList(preState = initUserListState,action) {
+  switch (action.type){
+    case UPDATA_USER_LIST :
+      return action.data;
+    case RESET_USER_LIST :
+      return action.data;
+    default:
+      return preState;
+  }
+}
+
 export default combineReducers({
-  user
+  user,
+  userList
 });
 
 
