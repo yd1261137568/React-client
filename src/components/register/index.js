@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {NavBar, List, InputItem, Button, WingBlank, WhiteSpace, Radio} from 'antd-mobile';
-import Logo from '../logo/logo.jsx';
+import Logo from '../logo';
 import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
 

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {NavBar,WingBlank,Button,List, InputItem, WhiteSpace,} from 'antd-mobile';
-import Logo from '../logo/logo.jsx';
-import {reqLogin} from '../../api';
+import Logo from '../logo';
+// import {reqLogin} from '../../api';
+import {Redirect} from 'react-router-dom';
 
 
 class Login extends Component {
@@ -16,27 +17,26 @@ class Login extends Component {
     })
   };
   handleLogin = async () => {
-    const {username,password} = this.state;
     //发送ajax请求
-    const data = await reqLogin({username,password});
-    console.log("*********");
-    console.log(data);
-
-    if(data.data.code === 0){
-      alert('登录成功')
-    }else if(data.data.code === 1){
-      alert('用户名或密码错误')
-    }else if(data.data.code ===2){
-      alert('您输入的不合法,请重新输入')
-    }else if(data.data.code ===3){
-      alert('网络不稳定，请重新试试~')
-    }
+    this.props.login(this.state);
+  };
+  goRegister = () => {
+    //跳转到登录路由，编程式导航
+    this.props.history.replace('/register');  //替换浏览历史记录
   };
   render() {
+   const {meg, redirectTo} = this.props.user;
+   if(redirectTo){
+     //编程式导航的写法
+     // this.props.history.replace(redirectTo);
+     //路由链接跳转
+     return <Redirect to={redirectTo} />
+   }
     return (
       <div>
         <NavBar>硅谷直聘</NavBar>
         <Logo />
+        {meg ? <p className='err-msg'>{meg}</p> : ''}
         <WingBlank>
           <form>
             <List>

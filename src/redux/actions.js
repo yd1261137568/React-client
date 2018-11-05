@@ -7,7 +7,8 @@ import {reqLogin,reqRegister,reqUpdateUserInfo,reqGetUserInfo,reqGetUserList} fr
 export const authSuccess = user => ({type:AUTH_SUCCESS,data:user});
 export const errMeg = meg => ({type:ERR_MEG,data:meg});
 
-export const updateUser = user => ({type:UPDATA_USER,data:user});
+
+export const updateUser = user => ({type:UPDATA_USER,data: user});
 export const resetUser = meg => ({type:RESET_USER,data:meg});
 
 //更新用户列表
@@ -35,6 +36,7 @@ export const register = data => {
       .then(res => {
         //请求成功（并不能判断注册是否成功，所以还需要判断）
         const result = res.data;
+        console.log(result);
         if(result.code === 0){
           //注册成功
           dispatch(authSuccess(result.data))
@@ -72,7 +74,7 @@ export const login = data => {
         dispatch(errMeg({meg:'网络不稳定，请重新刷新'}))
       })
   }
-}
+};
 
 //更新用户数据的异步的action
 export const updateUserInfo = data => {
@@ -113,7 +115,28 @@ export const updateUserInfo = data => {
         dispatch(resetUser({meg:'网络不稳定，请重新刷新'}))
       })
   }
-}
+};
+
+//获取用户信息的异步action
+export const getUserInfo = () => {
+  return dispatch => {
+    //发送请求
+    reqGetUserInfo()
+      .then(res => {
+        const result = res.data;
+        if (result.code === 0) {
+          //请求成功
+          dispatch(updateUser(result.data));
+        } else {
+          //请求失败
+          dispatch(resetUser({meg: result.meg}));
+        }
+      })
+      .catch(err => {
+        dispatch(resetUser({meg: '网络不稳定，请重新刷新'}));
+      })
+  }
+};
 
 //获取用户列表数据的异步action
 export const getUserList = type => {

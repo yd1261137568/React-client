@@ -31,6 +31,7 @@ class DashenInfo extends Component {
   };
   render() {
     const {meg, header} = this.props.user;
+    console.log(this.props.user);
     if (header) {
       return <Redirect to='/dashen'/>
     }
@@ -46,5 +47,5 @@ class DashenInfo extends Component {
     );
   }
 }
-;
+
 export default DashenInfo;

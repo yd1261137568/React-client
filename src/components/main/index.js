@@ -60,7 +60,7 @@ class Main extends Component {
           <Route path="/message" component={Message}/>
           <Route path="/personal" component={Personal}/>
         </Switch>
-        <NavFooter navList={navList} className="navFooter"/>
+        {currentNav ? <NavFooter navList={navList}/> : ''}
       </div>
     );
   }
