@@ -10,22 +10,43 @@ class UserList extends Component {
   };
 
   render() {
-    const {username, header} = this.props.item;
+    console.log(this.props);
+    const {username, header, post, info, salary, company, _id} = this.props.item;
+
     return (
-      <WingBlank>
-        <WhiteSpace />
+    <WingBlank>
+      <div>
+        <WhiteSpace/>
         <Card>
           <Header
             thumb={require(`../../assets/images/${header}.png`)}
             extra={username}
           />
           <Body>
-          <div>This is content of `Card`</div>
+          <div>职位: {post}</div>
+          {company ? <div>公司: {company}</div> : ''}
+          {salary ? <div>月薪: {salary}</div> : ''}
+          <div>描述: {info}</div>
           </Body>
-          <Card.Footer content="footer content" extra={<div>extra footer content</div>}/>
         </Card>
-        <WhiteSpace size="lg"/>
-      </WingBlank>
+      </div>
+    </WingBlank>
+
+
+      // <WingBlank>
+      //   <WhiteSpace />
+      //   <Card>
+      //     <Header
+      //       thumb={require(`../../assets/images/${header}.png`)}
+      //       extra={username}
+      //     />
+      //     <Body>
+      //     <div>This is content of `Card`</div>
+      //     </Body>
+      //     <Card.Footer content="footer content" extra={<div>extra footer content</div>}/>
+      //   </Card>
+      //   <WhiteSpace size="lg"/>
+      // </WingBlank>
     );
   }
 }

@@ -36,7 +36,7 @@ class Login extends Component {
       <div>
         <NavBar>硅谷直聘</NavBar>
         <Logo />
-        {meg ? <p className='err-msg'>{meg}</p> : ''}
+        {meg ? <p className='err-meg'>{meg}</p> : ''}
         <WingBlank>
           <form>
             <List>
@@ -44,9 +44,12 @@ class Login extends Component {
               <InputItem placeholder="请输入用户名" onChange={val => this.handleChange('username', val)}>用户名:</InputItem>
               <WhiteSpace />
               <InputItem placeholder="请输入密码" type="password" onChange={val => this.handleChange('password', val)}>密码:</InputItem>
-              <WhiteSpace />
-              <Button type="primary" onClick={this.handleLogin}>登录</Button>
+
             </List>
+            <WhiteSpace />
+            <Button type="primary" onClick={this.handleLogin}>登录</Button>
+            <WhiteSpace />
+            <Button onClick={this.goRegister}>还没有账号?</Button>
           </form>
         </WingBlank>
       </div>

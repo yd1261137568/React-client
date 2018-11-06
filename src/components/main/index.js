@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch,Redirect} from 'react-router-dom';
 import {NavBar} from 'antd-mobile';
+import PropTypes from 'prop-types';
+import Cookies from 'js-cookie';
 
 import LaobanInfo from '../../containers/laoban-info';
 import DashenInfo from '../../containers/dashen-info';
@@ -8,10 +10,18 @@ import Dashen from '../../containers/dashen';
 import Laoban from '../../containers/laoban';
 import Message from '../../containers/message';
 import Personal from '../../containers/personal';
-
 import NavFooter from '../../components/nav-footer';
+import Chat from '../../containers/chat';
+
+import {getRedirectPath} from '../../utils'
+
+
 
 class Main extends Component {
+  static propTypes = {
+    user: PropTypes.object.isRequired,
+    getUserInfo: PropTypes.func.isRequired
+  };
   navList = [
     {
       path: '/laoban', // 路由路径
@@ -44,9 +54,31 @@ class Main extends Component {
   ];
 
   render() {
-    const {navList} = this;
+    const userid = Cookies.get('userid');
+    if(!userid){
+      return <Redirect to='/login' />;
+    }
+    const {user} = this.props;
+    if(!user._id){
+      //发送ajax
+      this.props.getUserInfo();
+      return <div>loading.....</div>;
+    }
+
     //获取当前路由路径
     const {pathname} = this.props.location;
+
+    if(pathname === '/'){
+      return <Redirect to={getRedirectPath(user.type,user.header)} />
+    }
+
+    const {navList} = this;
+    // console.log(navList);
+    if(user.type === 'dashen'){
+      navList[0].hide = true;
+    }else {
+      navList[1].hide = true;
+    }
     //当前路由路径对应显示的nav对象
     const currentNav = navList.find(nav => pathname === nav.path);
     return (
@@ -59,6 +91,7 @@ class Main extends Component {
           <Route path="/laoban" component={Laoban}/>
           <Route path="/message" component={Message}/>
           <Route path="/personal" component={Personal}/>
+          <Route path="/chat/:userid" component={Chat}/>
         </Switch>
         {currentNav ? <NavFooter navList={navList}/> : ''}
       </div>

@@ -14,6 +14,6 @@ export const reqRegister = data => ajax('/register', data, 'POST');
 export const reqUpdateUserInfo = data => ajax('/update', data, 'POST');
 
 //请求获取用户数据的函数
-export const reqGetUserInfo = () => ajax('/user'); //--------------------------还没用上？
+export const reqGetUserInfo = () => ajax('/user');
 //请求获取用户列表数据的函数
 export const reqGetUserList = type => ajax('/userlist',{type});

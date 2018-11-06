@@ -16,7 +16,7 @@ class Laoban extends Component {
     return (
       <div>
         {
-          // userList.map((item,index) => <UserList key={index} item={item} />)
+          userList.map((item,index) => <UserList key={index} item={item} />)
         }
       </div>
     );
